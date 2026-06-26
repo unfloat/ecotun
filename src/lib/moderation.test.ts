@@ -12,4 +12,9 @@ describe("canTransition", () => {
   it("forbids REJECTED -> APPROVED", () => {
     expect(canTransition("REJECTED" as Status, "APPROVED")).toBe(false);
   });
+  it("allows ARCHIVED -> APPROVED (re-publish) but nothing else", () => {
+    expect(canTransition("ARCHIVED", "APPROVED")).toBe(true);
+    expect(canTransition("ARCHIVED", "REJECTED")).toBe(false);
+    expect(canTransition("ARCHIVED", "PENDING")).toBe(false);
+  });
 });
