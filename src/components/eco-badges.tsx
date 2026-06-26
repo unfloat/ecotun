@@ -48,11 +48,11 @@ export function CertificationBadges({
 
   return (
     <div className="flex flex-wrap gap-1.5" aria-label="Certifications">
-      {certifications.map((cert, i) => {
+      {certifications.map((cert) => {
         const label = CERTIFICATION_LABELS[cert.type] ?? cert.type;
         return (
           <span
-            key={i}
+            key={cert.type}
             className="inline-flex items-center gap-1 rounded-full border border-accent/50 bg-accent/10 px-2.5 py-0.5 text-xs font-medium text-accent"
           >
             {label}

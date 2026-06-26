@@ -142,23 +142,19 @@ export function FilterBar({
               value={q}
               onChange={(e) => handleSearch(e.target.value)}
               placeholder="Search businesses…"
-              className="h-10 w-full min-w-0 rounded-lg border border-input bg-transparent pl-9 pr-3 text-sm placeholder:text-muted-foreground focus-visible:border-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 transition-colors"
+              className="h-11 w-full min-w-0 rounded-lg border border-input bg-transparent pl-9 pr-3 text-sm placeholder:text-muted-foreground focus-visible:border-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 transition-colors"
               autoComplete="off"
             />
           </div>
 
           {/* Category select */}
           <div className="flex flex-col gap-1">
-            <label htmlFor="filter-category" className="sr-only">
-              Category
-            </label>
             <Select
               value={activeCategory || null}
               onValueChange={(v) => handleCategory(v)}
-              id="filter-category"
             >
               <SelectTrigger
-                className="h-10 min-w-36"
+                className="h-11 min-w-36"
                 aria-label="Filter by category"
               >
                 <SelectValue placeholder="All categories" />
@@ -176,16 +172,12 @@ export function FilterBar({
 
           {/* Governorate select */}
           <div className="flex flex-col gap-1">
-            <label htmlFor="filter-governorate" className="sr-only">
-              Governorate
-            </label>
             <Select
               value={activeGovernorate || null}
               onValueChange={(v) => handleGovernorate(v)}
-              id="filter-governorate"
             >
               <SelectTrigger
-                className="h-10 min-w-36"
+                className="h-11 min-w-36"
                 aria-label="Filter by governorate"
               >
                 <SelectValue placeholder="All governorates" />
@@ -251,7 +243,7 @@ export function FilterBar({
                 aria-checked={active}
                 onClick={() => togglePractice(key)}
                 className={[
-                  "inline-flex min-h-[36px] items-center rounded-full border px-3 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                  "inline-flex min-h-[44px] items-center rounded-full border px-3 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
                   active
                     ? "border-primary bg-primary/10 text-primary"
                     : "border-border bg-transparent text-muted-foreground hover:border-primary/50 hover:bg-primary/5 hover:text-primary",

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LeafIcon } from "lucide-react";
 import { FilterBar } from "@/components/filter-bar";
 import { BusinessCard } from "@/components/business-card";
 import { listBusinesses } from "@/server/businesses";
@@ -91,7 +92,7 @@ export default async function HomePage({
         ) : (
           /* Empty state */
           <div className="flex flex-col items-center gap-4 rounded-xl border border-border bg-muted/40 px-6 py-16 text-center">
-            <span className="text-4xl" aria-hidden="true">🌿</span>
+            <LeafIcon className="size-10 text-primary/60" aria-hidden="true" />
             <h2 className="font-heading text-lg font-semibold text-foreground">
               No eco-businesses match your filters
             </h2>
