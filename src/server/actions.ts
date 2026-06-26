@@ -4,6 +4,8 @@ import { db } from "@/lib/db";
 import { submissionSchema } from "@/lib/validation";
 import { slugify } from "@/lib/slug";
 import { revalidatePath } from "next/cache";
+import { auth } from "@/server/auth";
+import { canTransition } from "@/lib/moderation";
 
 export type SubmitState = {
   ok: boolean;
@@ -67,5 +69,57 @@ export async function submitBusiness(
   });
 
   revalidatePath("/admin");
+  return { ok: true };
+}
+
+// ---------------------------------------------------------------------------
+// moderate — admin-only action to approve / reject / archive a business
+// ---------------------------------------------------------------------------
+export type ModerateAction = "approve" | "reject" | "archive";
+
+export async function moderate(
+  id: string,
+  action: ModerateAction,
+  opts?: {
+    note?: string;
+    verification?: "SELF_DECLARED" | "EVIDENCE_PROVIDED" | "ADMIN_VERIFIED";
+  }
+): Promise<{ ok: boolean; error?: string }> {
+  // Defense in depth: verify session before any mutation
+  const session = await auth();
+  if (!session?.user) {
+    return { ok: false, error: "Unauthorized" };
+  }
+
+  const business = await db.business.findUnique({ where: { id } });
+  if (!business) {
+    return { ok: false, error: "Business not found" };
+  }
+
+  const targetStatus =
+    action === "approve"
+      ? "APPROVED"
+      : action === "reject"
+      ? "REJECTED"
+      : "ARCHIVED";
+
+  if (!canTransition(business.status, targetStatus)) {
+    return { ok: false, error: "Invalid transition" };
+  }
+
+  await db.business.update({
+    where: { id },
+    data: {
+      status: targetStatus,
+      reviewedAt: new Date(),
+      reviewNote: opts?.note ?? null,
+      ...(action === "approve" && opts?.verification
+        ? { verification: opts.verification }
+        : {}),
+    },
+  });
+
+  revalidatePath("/admin");
+  revalidatePath("/");
   return { ok: true };
 }
