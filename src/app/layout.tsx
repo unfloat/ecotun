@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import InstallPrompt from "@/components/install-prompt";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -22,6 +23,25 @@ export const metadata: Metadata = {
   title: "ECOTUN — Eco-conscious businesses in Tunisia",
   description:
     "Discover eco-conscious restaurants, cafés, shops, and services across Tunisia committed to sustainable practices.",
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "ECOTUN",
+  },
+  icons: {
+    icon: [
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#1A7F4B",
 };
 
 export default function RootLayout({
@@ -85,6 +105,7 @@ export default function RootLayout({
         </main>
 
         <Toaster />
+        <InstallPrompt />
       </body>
     </html>
   );
