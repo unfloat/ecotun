@@ -58,7 +58,7 @@ export default function InstallPrompt() {
 
   return (
     <div
-      role="dialog"
+      role="region"
       aria-label="Install ECOTUN app"
       aria-live="polite"
       className="fixed bottom-4 left-4 right-4 z-50 flex items-center gap-3 rounded-xl border border-border bg-card p-4 shadow-md sm:left-auto sm:right-4 sm:max-w-sm"

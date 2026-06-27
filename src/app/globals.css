@@ -50,6 +50,7 @@
 
 /* Light mode — ECOTUN design system tokens */
 :root {
+  color-scheme: light;
   /* Background: warm off-white #FBFAF6 */
   --background: oklch(0.985 0.006 90);
   /* Foreground: deep green-charcoal #1B2A22 */
@@ -98,6 +99,7 @@
 
 /* Dark mode — ECOTUN design system tokens */
 .dark {
+  color-scheme: dark;
   /* Background: #11140F */
   --background: oklch(0.1 0.02 152);
   /* Foreground: #E9ECE4 */

@@ -36,7 +36,7 @@ export default async function AdminLayout({
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
           {/* Wordmark + context */}
           <div className="flex items-center gap-3">
-            <span className="font-heading text-xl font-700 text-primary">
+            <span className="font-heading text-xl font-700 text-primary" translate="no">
               ECOTUN
             </span>
             <span className="text-muted-foreground text-sm font-medium hidden sm:inline">

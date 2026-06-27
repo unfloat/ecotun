@@ -183,7 +183,7 @@ export function SubmitForm() {
               aria-invalid={!!e.category}
               aria-describedby={e.category ? "category-error" : "category-desc"}
               defaultValue=""
-              className="h-11 w-full rounded-xl border border-input bg-transparent px-3 py-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:opacity-50 aria-invalid:border-destructive"
+              className="h-11 w-full rounded-xl border border-input bg-background px-3 py-2 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:opacity-50 aria-invalid:border-destructive"
             >
               <option value="" disabled>
                 Select a category…
@@ -287,7 +287,7 @@ export function SubmitForm() {
               aria-invalid={!!e.governorate}
               aria-describedby={e.governorate ? "governorate-error" : undefined}
               defaultValue=""
-              className="h-11 w-full rounded-xl border border-input bg-transparent px-3 py-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:opacity-50 aria-invalid:border-destructive"
+              className="h-11 w-full rounded-xl border border-input bg-background px-3 py-2 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:opacity-50 aria-invalid:border-destructive"
             >
               <option value="" disabled>
                 Select a governorate…
@@ -434,7 +434,8 @@ export function SubmitForm() {
               id="email"
               name="email"
               type="email"
-              autoComplete="email"
+              autoComplete="off"
+              spellCheck={false}
               aria-invalid={!!e.email}
               aria-describedby={e.email ? "email-error" : undefined}
               className="h-11"
@@ -476,7 +477,7 @@ export function SubmitForm() {
               id="instagram"
               name="instagram"
               type="text"
-              placeholder="@yourbusiness"
+              placeholder="@yourbusiness…"
               aria-invalid={!!e.instagram}
               aria-describedby={e.instagram ? "instagram-error" : undefined}
               className="h-11"

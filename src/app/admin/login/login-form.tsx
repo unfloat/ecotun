@@ -34,6 +34,7 @@ export function LoginForm() {
           name="email"
           type="email"
           autoComplete="email"
+          spellCheck={false}
           required
           placeholder="admin@ecotun.tn"
           className="h-11"

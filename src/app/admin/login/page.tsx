@@ -12,7 +12,7 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-sm space-y-8">
         {/* Wordmark */}
         <div className="text-center">
-          <span className="font-heading text-2xl font-700 text-primary">
+          <span className="font-heading text-2xl font-700 text-primary" translate="no">
             ECOTUN
           </span>
         </div>
