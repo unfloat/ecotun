@@ -1,0 +1,134 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Category {
+  RESTAURANT
+  CAFE
+  GROCERY_MARKET
+  RETAIL_SHOP
+  SERVICES
+  COMPANY_B2B
+  ACCOMMODATION
+  OTHER
+}
+
+enum Governorate {
+  TUNIS
+  ARIANA
+  BEN_AROUS
+  MANOUBA
+  NABEUL
+  ZAGHOUAN
+  BIZERTE
+  BEJA
+  JENDOUBA
+  KEF
+  SILIANA
+  SOUSSE
+  MONASTIR
+  MAHDIA
+  SFAX
+  KAIROUAN
+  KASSERINE
+  SIDI_BOUZID
+  GABES
+  MEDENINE
+  TATAOUINE
+  GAFSA
+  TOZEUR
+  KEBILI
+}
+
+enum Practice {
+  PLANT_BASED_OPTIONS
+  LOCALLY_SOURCED
+  ZERO_WASTE_COMPOSTING
+  NO_SINGLE_USE_PLASTIC
+  REUSABLE_PACKAGING
+  BULK_PACKAGE_FREE
+  RENEWABLE_ENERGY
+  WATER_CONSERVATION
+  RECYCLING_PROGRAM
+  ANTI_FOOD_WASTE
+  FAIR_ETHICAL_LABOR
+  BIKE_EV_FRIENDLY
+}
+
+enum CertificationType {
+  ORGANIC_BIO_TUNISIE
+  EU_ORGANIC
+  USDA_ORGANIC
+  FAIR_TRADE
+  ISO_14001
+  B_CORP
+  EU_ECOLABEL
+  GREEN_KEY
+  LEED
+  MSC
+}
+
+enum ModerationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  ARCHIVED
+}
+
+enum Verification {
+  SELF_DECLARED
+  EVIDENCE_PROVIDED
+  ADMIN_VERIFIED
+}
+
+model Business {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  name             String
+  category         Category
+  shortDescription String
+  description      String
+  governorate      Governorate
+  city             String
+  address          String?
+  lat              Float?
+  lng              Float?
+  phone            String?
+  email            String?
+  website          String?
+  instagram        String?
+  facebook         String?
+  priceRange       Int?
+  images           String[]
+  tags             String[]
+  practices        Practice[]
+  submitterName    String?
+  submitterEmail   String?
+  status           ModerationStatus @default(PENDING)
+  verification     Verification     @default(SELF_DECLARED)
+  reviewNote       String?
+  reviewedAt       DateTime?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  certifications   BusinessCertification[]
+
+  @@index([status])
+  @@index([category])
+  @@index([governorate])
+}
+
+model BusinessCertification {
+  id          String            @id @default(cuid())
+  business    Business          @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  businessId  String
+  type        CertificationType
+  issuer      String?
+  year        Int?
+  evidenceUrl String?
+
+  @@index([businessId])
+}
